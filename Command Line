@@ -1,0 +1,1 @@
+setx PROMPT $E[1;32;40m[CP:..$P]$E[1;37;0m$G$S
