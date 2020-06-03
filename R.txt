@@ -1,0 +1,20 @@
+echo -e '# Current working directory name in prompt' >> ~/.Rprofile
+
+echo -e '
+## For first startup
+options(
+    prompt = paste0("\033[0;32m[R:..", basename(getwd()), "]\033[0m", "> "),
+    continue = paste0("\033[0;32m[R:..", basename(getwd()), "]\033[0m", "+ ")
+)
+' >> ~/.Rprofile
+
+echo '
+## When changing working directory
+setwd <- function(...) {
+    base::setwd(...)
+    options(
+        prompt = paste0("\033[0;32m[R:..", basename(getwd()), "]\033[0m", "> "),
+        continue = paste0("\033[0;32m[R:..", basename(getwd()), "]\033[0m", "+ ")
+    )
+}
+' >> ~/.Rprofile
