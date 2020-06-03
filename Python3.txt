@@ -1,0 +1,26 @@
+echo '# For custom prompt'  >> `python3 -m site --user-site`/usercustomize.py
+
+echo '
+# Import required modules
+import sys
+import os' >> `python3 -m site --user-site`/usercustomize.py
+
+echo '
+# Set class for prompt (PS1)
+class Prompt:
+    def __str__(self):
+        return "\x1b[1;49;32m[Py3:.." + os.path.basename(os.getcwd()) + "]\x1b[0m> "
+' >> `python3 -m site --user-site`/usercustomize.py
+
+echo '
+# Set class for continue (PS2)
+class Contd:
+    def __str__(self):
+        return "\x1b[1;49;32m[Py3:.." + os.path.basename(os.getcwd()) + "]\x1b[0m… "
+' >> `python3 -m site --user-site`/usercustomize.py
+
+echo '
+# Assign prompts
+sys.ps1 = Prompt()
+sys.ps2 = Contd()
+' >> `python3 -m site --user-site`/usercustomize.py
