@@ -1,0 +1,7 @@
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
+
+'# Custom PS1 prompt' | Add-Content $profile.CurrentUserAllHosts
+
+'function Prompt {"$([char]27)[32m[PS:..$(Split-Path -leaf -path (Get-Location))]$([char]27)[0m> "}' | Add-Content $profile.CurrentUserAllHosts
+
+Unblock-File -Path $profile.CurrentUserAllHosts
