@@ -1,0 +1,4 @@
+echo '
+# Custom PS1 prompt
+PS1="\[\033[01;32m\][WSL:..\W]\[\033[00m\]\$ "
+' >> ~/.bashrc
