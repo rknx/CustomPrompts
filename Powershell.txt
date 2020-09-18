@@ -1,7 +1,16 @@
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
 
-'# Custom PS1 prompt' | Add-Content $profile.CurrentUserAllHosts
+$promptFunc = @'
 
-'function Prompt {"$([char]27)[32m[PS:..$(Split-Path -leaf -path (Get-Location))]$([char]27)[0m> "}' | Add-Content $profile.CurrentUserAllHosts
+# Check if Elevated
+$currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+$adminMode = $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+
+# Custom prompt
+if ($adminMode) { $char1 = "PS⛨" } else { $char1 = "PS" }
+function Prompt {"$([char]27)[32m[${char1}:..$(Split-Path -leaf -path (Get-Location))]$([char]27)[0m> "}
+'@
+
+Add-Content $profile.CurrentUserAllHosts $promptFunc
 
 Unblock-File -Path $profile.CurrentUserAllHosts
